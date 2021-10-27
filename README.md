@@ -1,5 +1,6 @@
 # ReMod.TSAC
-A ReMod module implementation of TrueShaderAntiCrash
+A ReMod module implementation of TrueShaderAntiCrash  
+The purpose of this repository is to respect the GPL license of TrueShaderAntiCrash. There is no difference when it comes to features compared to the original!
 
 # Description
 This is a ReMod module implementation for knah's TrueShaderAntiCrash. The original code can be found [here](https://github.com/knah/VRCMods).  
