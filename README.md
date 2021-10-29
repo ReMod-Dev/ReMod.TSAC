@@ -9,4 +9,4 @@ This module prevents practically all known shader crashes. Note that it can affe
 Main logic of this mod is located in the native DLL that currently is not opensource. The DLL is build upon [HLSLcc](https://github.com/Unity-Technologies/HLSLcc) and uses [Microsoft Detours](https://github.com/microsoft/Detours).
 
 ## License
-This mod is here is provided under the terms of [GNU GPLv3 license](LICENSE)
+This module here is provided under the terms of [GNU GPLv3 license](LICENSE)
