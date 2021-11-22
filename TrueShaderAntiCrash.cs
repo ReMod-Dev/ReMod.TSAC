@@ -40,8 +40,8 @@ namespace ReMod.TSAC
 
             if (!OurOffsets.TryGetValue(unityPlayerHash, out var offset))
             {
-                MelonLogger.Error($"Unknown UnityPlayer hash: {unityPlayerHash}");
-                MelonLogger.Error("The mod will not work");
+                ReLogger.Error($"Unknown UnityPlayer hash: {unityPlayerHash}");
+                ReLogger.Error("The mod will not work");
                 return;
             }
 
