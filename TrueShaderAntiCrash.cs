@@ -10,6 +10,7 @@ using MelonLoader;
 using ReMod.Core;
 using ReMod.Loader;
 using UnityEngine.SceneManagement;
+using VRC.Core;
 
 namespace ReMod.TSAC
 {
@@ -99,9 +100,23 @@ namespace ReMod.TSAC
             var loopsEnabled = category.CreateEntry("LimitLoops", true, "Limit loops");
             var geometryEnabled = category.CreateEntry("LimitGeometry", true, "Limit geometry shaders");
             var tessEnabled = category.CreateEntry("LimitTesselation", true, "Limit tesselation");
+            
+            IEnumerator WaitForRoomManagerAndUpdate()
+            {
+                while (RoomManager.field_Internal_Static_ApiWorldInstance_0 == null)
+                    yield return null;
+                UpdateLimiters();
+            }
 
             void UpdateLimiters()
             {
+                var room = RoomManager.field_Internal_Static_ApiWorldInstance_0;
+                if (room == null)
+                {
+                    MelonCoroutines.Start(WaitForRoomManagerAndUpdate());
+                    return;
+                }
+
                 _filterApi.SetFilteringState(loopsEnabled.Value, geometryEnabled.Value, tessEnabled.Value);
             }
 
