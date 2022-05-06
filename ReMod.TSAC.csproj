@@ -24,7 +24,6 @@
     <Deterministic>true</Deterministic>
 	<PlatformTarget>x64</PlatformTarget>
 	
-	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 	<IntermediateOutputPath>$(BaseIntermediateOutputPath)\tmp\$(Configuration) ($(PlatformTarget))\$(ProjectName)\</IntermediateOutputPath>
     <OutputPath>..\.build\$(Configuration) ($(PlatformTarget))\Modules\$(ProjectName)\</OutputPath>
 	
