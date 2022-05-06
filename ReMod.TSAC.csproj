@@ -1,90 +1,80 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Condition="'$(VRCPath)'==''">
+    <VRCPath Condition="Exists('C:/Program Files (x86)/Steam/steamapps/common/VRChat')">C:/Program Files (x86)/Steam/steamapps/common/VRChat</VRCPath>
+	<VRCPath Condition="Exists('D:\Steam\steamapps\common\VRChat')">D:\Steam\steamapps\common\VRChat</VRCPath>
+    <VRCPath Condition="Exists('$(HOME)/.steam/steam/steamapps/common/VRChat')">$(HOME)/.steam/steam/steamapps/common/VRChat</VRCPath>
+    <VRCPath Condition="Exists('S:\Games\steamapps\common\VRChat')">S:\Games\steamapps\common\VRChat</VRCPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(MlPath)'==''">
+    <MlPath>$(SolutionDir)\3rdparty\ml</MlPath>
+    <MlPath Condition="!Exists('$(MlPath)') And Exists('$(VRCPath)/MelonLoader')">$(VRCPath)/MelonLoader</MlPath>
+  </PropertyGroup>
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0797F78D-E087-4979-9AC8-19D2F50BBC7D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ReMod.TSAC</RootNamespace>
     <AssemblyName>ReMod.TSAC</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+	
+	<TargetFramework>net472</TargetFramework>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <PlatformTarget>x64</PlatformTarget>
+	<PlatformTarget>x64</PlatformTarget>
+	
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	<IntermediateOutputPath>$(BaseIntermediateOutputPath)\tmp\$(Configuration) ($(PlatformTarget))\$(ProjectName)\</IntermediateOutputPath>
     <OutputPath>..\.build\$(Configuration) ($(PlatformTarget))\Modules\$(ProjectName)\</OutputPath>
-    <BaseIntermediateOutputPath>..\.build</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(BaseIntermediateOutputPath)\tmp\$(Configuration) ($(PlatformTarget))\$(ProjectName)\</IntermediateOutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+	
+	<DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
+	
+	<DebugSymbols Condition="'$(Configuration)'=='Release'">false</DebugSymbols>
+    <DebugType Condition="'$(Configuration)'=='Release'">None</DebugType>
+	<Optimize Condition="'$(Configuration)'=='Release'">true</Optimize>
+	
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <PlatformTarget>x64</PlatformTarget>
-    <OutputPath>..\.build\$(Configuration) ($(PlatformTarget))\Modules\$(ProjectName)\</OutputPath>
-    <BaseIntermediateOutputPath>..\.build</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(BaseIntermediateOutputPath)\tmp\$(Configuration) ($(PlatformTarget))\$(ProjectName)\</IntermediateOutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+  
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\3rdparty\ml\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>$(MlPath)\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2Cppmscorlib">
-      <HintPath>..\3rdparty\ml\Managed\Il2Cppmscorlib.dll</HintPath>
+      <HintPath>$(MlPath)\Managed\Il2Cppmscorlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MelonLoader">
-      <HintPath>..\3rdparty\ml\MelonLoader.dll</HintPath>
+      <HintPath>$(MlPath)\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnhollowerBaseLib">
-      <HintPath>..\3rdparty\ml\Managed\UnhollowerBaseLib.dll</HintPath>
+      <HintPath>$(MlPath)\Managed\UnhollowerBaseLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\3rdparty\ml\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(MlPath)\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRCCore-Standalone">
-      <HintPath>..\3rdparty\ml\Managed\VRCCore-Standalone.dll</HintPath>
+      <HintPath>$(MlPath)\Managed\VRCCore-Standalone.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShaderFilterApi.cs" />
-    <Compile Include="TrueShaderAntiCrash.cs" />
+    <ProjectReference Include="..\ReMod.Core\ReMod.Core.csproj"/>
+    <ProjectReference Include="..\ReMod.Loader\ReMod.Loader.csproj"/>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ReMod.Core\ReMod.Core.csproj">
-      <Project>{c87fe758-acb9-4fa2-af6f-10aa9aa0023c}</Project>
-      <Name>ReMod.Core</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\ReMod.Loader\ReMod.Loader.csproj">
-      <Project>{ffeb5ee1-dd97-4796-b437-a60f9cccc39d}</Project>
-      <Name>ReMod.Loader</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
+  
   <ItemGroup>
     <EmbeddedResource Include="DxbcShaderFilter.dll" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
