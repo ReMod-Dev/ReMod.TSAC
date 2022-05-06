@@ -19,7 +19,7 @@
     <RootNamespace>ReMod.TSAC</RootNamespace>
     <AssemblyName>ReMod.TSAC</AssemblyName>
 	
-	<TargetFramework>net472</TargetFramework>
+	<TargetFrameworks>net472;net6</TargetFrameworks>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
 	<PlatformTarget>x64</PlatformTarget>
@@ -70,8 +70,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ReMod.Core\ReMod.Core.csproj"/>
-    <ProjectReference Include="..\ReMod.Loader\ReMod.Loader.csproj"/>
+    <ProjectReference Include="..\ReMod.Core\ReMod.Core.csproj" />
+    <ProjectReference Include="..\ReMod.Loader\ReMod.Loader.csproj" />
   </ItemGroup>
   
   <ItemGroup>
